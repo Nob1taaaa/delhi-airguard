@@ -128,10 +128,10 @@ const Dashboard = () => {
                 </motion.div>
 
                 {/* Main Grid Layout - Creative Bento Box Design (Green Theme) */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 md:gap-6">
 
                     {/* ROW 1: Status & Trends */}
-                    <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-sm border border-green-100 overflow-hidden hover:shadow-lg hover:shadow-green-100/50 transition-all duration-300 group">
+                    <div className="bg-white/90 md:bg-white/80 backdrop-blur-xl md:backdrop-blur-md rounded-2xl shadow-md md:shadow-sm border border-green-100 overflow-hidden hover:shadow-lg hover:shadow-green-100/50 transition-all duration-300 group">
                         <AQICard
                             title="Current AQI"
                             value={currentAQI}
@@ -142,12 +142,12 @@ const Dashboard = () => {
                             trend="up"
                         />
                     </div>
-                    <div className="lg:col-span-2 bg-white/80 backdrop-blur-md border border-green-100 rounded-2xl p-4 md:p-6 shadow-sm min-h-[300px] md:min-h-[350px] hover:shadow-lg hover:shadow-green-100/50 transition-all duration-300">
+                    <div className="lg:col-span-2 bg-white/90 md:bg-white/80 backdrop-blur-xl md:backdrop-blur-md border border-green-100 rounded-2xl p-4 md:p-6 shadow-md md:shadow-sm min-h-[320px] md:min-h-[350px] hover:shadow-lg hover:shadow-green-100/50 transition-all duration-300">
                         <PredictionGraph data={predictionData} />
                     </div>
 
                     {/* ROW 2: Navigation & Composition */}
-                    <div className="lg:col-span-2 bg-gradient-to-br from-green-50 to-emerald-50/30 backdrop-blur-md rounded-3xl border border-green-200 shadow-sm overflow-hidden min-h-[400px] md:min-h-[450px] hover:shadow-xl hover:shadow-green-100 transition-all duration-300">
+                    <div className="lg:col-span-2 bg-gradient-to-br from-green-50 to-emerald-50/30 backdrop-blur-xl md:backdrop-blur-md rounded-3xl border border-green-200 shadow-md md:shadow-sm overflow-hidden min-h-[380px] md:min-h-[450px] hover:shadow-xl hover:shadow-green-100 transition-all duration-300">
                         <div className="p-4 border-b border-green-100 bg-white/40 flex items-center gap-2">
                             <div className="p-2 bg-green-100 rounded-full">
                                 <Truck className="h-5 w-5 text-green-600" />
@@ -160,7 +160,7 @@ const Dashboard = () => {
                             <CleanCommute />
                         </div>
                     </div>
-                    <div className="bg-white/80 backdrop-blur-md border border-green-100 rounded-2xl p-4 shadow-sm overflow-hidden hover:shadow-lg hover:shadow-green-100/50 transition-all duration-300 flex flex-col justify-center">
+                    <div className="bg-white/90 md:bg-white/80 backdrop-blur-xl md:backdrop-blur-md border border-green-100 rounded-2xl p-4 shadow-md md:shadow-sm overflow-hidden hover:shadow-lg hover:shadow-green-100/50 transition-all duration-300 flex flex-col justify-center min-h-[300px]">
                         <h3 className="text-lg font-semibold text-slate-900 mb-4 px-2 flex items-center gap-2">
                             <Factory className="h-5 w-5 text-slate-400" />
                             Pollution DNA
@@ -176,15 +176,15 @@ const Dashboard = () => {
                     </div>
 
                     {/* ROW 3: Personal Impact & Health Advisory */}
-                    <div className="space-y-6">
+                    <div className="space-y-5 md:space-y-6">
                         <div className="hover:scale-[1.02] transition-transform duration-300">
                             <EcoWallet />
                         </div>
-                        <div className="bg-white/80 backdrop-blur-md rounded-2xl border border-green-100 shadow-sm overflow-hidden hover:shadow-lg hover:shadow-green-100/50 transition-all duration-300">
+                        <div className="bg-white/90 md:bg-white/80 backdrop-blur-xl md:backdrop-blur-md rounded-2xl border border-green-100 shadow-md md:shadow-sm overflow-hidden hover:shadow-lg hover:shadow-green-100/50 transition-all duration-300">
                             <LifeImpactCounter aqi={currentAQI} />
                         </div>
                     </div>
-                    <div className="lg:col-span-2 bg-white/80 backdrop-blur-md rounded-2xl border border-green-100 shadow-sm overflow-hidden p-6 hover:shadow-lg hover:shadow-green-100/50 transition-all duration-300">
+                    <div className="lg:col-span-2 bg-white/90 md:bg-white/80 backdrop-blur-xl md:backdrop-blur-md rounded-2xl border border-green-100 shadow-md md:shadow-sm overflow-hidden p-5 md:p-6 hover:shadow-lg hover:shadow-green-100/50 transition-all duration-300">
                         <h3 className="text-lg font-semibold text-slate-900 mb-6 flex items-center gap-2">
                             <Heart className="h-6 w-6 text-red-500 fill-red-500" />
                             Health Advisory
@@ -193,14 +193,14 @@ const Dashboard = () => {
                     </div>
 
                     {/* ROW 4: Actions */}
-                    <div className="lg:col-span-3">
+                    <div className="lg:col-span-3 pb-8">
                         <h3 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2 px-2">
                             <HardHat className="h-6 w-6 text-blue-600" />
                             Recommended Actions
                         </h3>
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
                             {actions.map((action, index) => (
-                                <div key={index} className="bg-white/80 backdrop-blur-md rounded-2xl border border-green-100 shadow-sm overflow-hidden hover:shadow-lg hover:shadow-green-100/50 transition-all duration-300 hover:-translate-y-1">
+                                <div key={index} className="bg-white/90 md:bg-white/80 backdrop-blur-xl md:backdrop-blur-md rounded-2xl border border-green-100 shadow-md md:shadow-sm overflow-hidden hover:shadow-lg hover:shadow-green-100/50 transition-all duration-300 hover:-translate-y-1">
                                     <ActionRecommendation {...action} />
                                 </div>
                             ))}
