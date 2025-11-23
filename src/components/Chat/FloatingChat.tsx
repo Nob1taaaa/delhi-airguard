@@ -93,7 +93,8 @@ const FloatingChat = () => {
             const requestedCity = locationMatch[1].trim();
             // Fetch data for the requested city
             try {
-                const response = await fetch(`http://localhost:8000/api/aqi/current?location=${requestedCity}`);
+                const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+                const response = await fetch(`${apiUrl}/api/aqi/current?location=${requestedCity}`);
                 const data = await response.json();
                 if (data && data.length > 0) {
                     targetLocation = data[0].location;

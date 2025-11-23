@@ -68,7 +68,9 @@ export const generateAIResponse = async (query: string, currentLocation: string,
     if (locationMatch && locationMatch[1]) {
         const requestedCity = locationMatch[1].trim();
         try {
-            const response = await fetch(`http://localhost:8000/api/aqi/current?location=${requestedCity}`);
+            // Use environment variable or fallback to localhost for development
+            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+            const response = await fetch(`${apiUrl}/api/aqi/current?location=${requestedCity}`);
             const data = await response.json();
             if (data && data.length > 0) {
                 targetLocation = data[0].location;
@@ -83,7 +85,9 @@ export const generateAIResponse = async (query: string, currentLocation: string,
                 return `I couldn't find data for ${requestedCity}. Please try another city.`;
             }
         } catch (error) {
-            return `I'm having trouble connecting to the server to check ${requestedCity}.`;
+            console.error('API Error:', error);
+            // Fallback response when API is unavailable
+            return `I can help you with general air quality advice. The current AQI in ${currentLocation} is ${currentAqiData?.aqi || 'unavailable'}.`;
         }
     }
 
