@@ -59,8 +59,13 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
-                const response = await fetch(`${apiUrl}/api/aqi/current?location=${location}`);
+                const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+                const response = await fetch(`${supabaseUrl}/functions/v1/aqi-data?location=${location}`);
+                
+                if (!response.ok) {
+                    throw new Error('Failed to fetch from backend');
+                }
+                
                 const data = await response.json();
                 if (data && data.length > 0) {
                     setAqiData(data[0]);
@@ -71,7 +76,7 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
                 }
             } catch (error) {
                 console.error("Failed to fetch AQI data", error);
-                // Fallback mock data for deployment when backend is not available
+                // Fallback mock data if backend is unavailable
                 setAqiData({
                     location: location,
                     aqi: 342,
