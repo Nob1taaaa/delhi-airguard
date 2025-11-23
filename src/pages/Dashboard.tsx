@@ -73,27 +73,27 @@ const Dashboard = () => {
                 variants={container}
                 initial="hidden"
                 animate="show"
-                className="relative z-10 p-6 space-y-8 max-w-[1600px] mx-auto"
+                className="relative z-10 p-4 md:p-6 space-y-6 md:space-y-8 max-w-[1600px] mx-auto"
             >
                 {/* Asthma Guardian Critical Alert */}
                 {userProfile.isAsthmatic && currentAQI > 200 && (
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        className="bg-red-600 text-white p-4 rounded-xl shadow-lg flex items-center justify-between animate-pulse"
+                        className="bg-red-600 text-white p-4 rounded-xl shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4 animate-pulse"
                     >
                         <div className="flex items-center gap-4">
-                            <div className="p-3 bg-white/20 rounded-full">
+                            <div className="p-3 bg-white/20 rounded-full shrink-0">
                                 <AlertTriangle className="h-8 w-8 text-white" />
                             </div>
                             <div>
                                 <h3 className="font-bold text-xl">CRITICAL ASTHMA ALERT</h3>
-                                <p className="text-red-100">AQI is dangerous. Use inhaler immediately if symptomatic. Stay indoors.</p>
+                                <p className="text-red-100 text-sm md:text-base">AQI is dangerous. Use inhaler immediately if symptomatic. Stay indoors.</p>
                             </div>
                         </div>
                         <Button
                             variant="secondary"
-                            className="bg-white text-red-600 hover:bg-red-50 shadow-sm"
+                            className="w-full sm:w-auto bg-white text-red-600 hover:bg-red-50 shadow-sm whitespace-nowrap"
                             onClick={() => setShowEmergency(true)}
                         >
                             Emergency Protocol
@@ -102,21 +102,23 @@ const Dashboard = () => {
                 )}
 
                 {/* Header & Hero Section */}
-                <motion.div variants={item} className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white/60 backdrop-blur-md p-6 rounded-2xl border border-white/50 shadow-sm">
+                <motion.div variants={item} className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white/60 backdrop-blur-md p-4 md:p-6 rounded-2xl border border-white/50 shadow-sm">
                     <div>
-                        <h1 className="text-4xl font-bold text-slate-900 tracking-tight">
+                        <h1 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
                             Delhi AirGuard
                         </h1>
-                        <p className="text-slate-600 mt-1 flex items-center gap-2">
+                        <p className="text-slate-600 mt-1 flex items-center gap-2 text-sm md:text-base">
                             <MapPin className="h-4 w-4" />
                             Monitoring: <span className="font-semibold text-slate-900">{location}</span>
                         </p>
                     </div>
 
-                    <div className="flex items-center gap-4">
-                        <LocationSearch />
-                        <div className="flex items-center gap-2 bg-white/80 backdrop-blur-md px-4 py-2 rounded-full shadow-sm border border-white/50">
-                            <span className="text-sm font-medium text-slate-600">Asthma Mode</span>
+                    <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
+                        <div className="flex-grow md:flex-grow-0">
+                            <LocationSearch />
+                        </div>
+                        <div className="flex items-center gap-2 bg-white/80 backdrop-blur-md px-3 py-2 rounded-full shadow-sm border border-white/50 ml-auto md:ml-0">
+                            <span className="text-xs md:text-sm font-medium text-slate-600">Asthma Mode</span>
                             <Switch
                                 checked={userProfile.isAsthmatic}
                                 onCheckedChange={toggleAsthma}
@@ -125,9 +127,8 @@ const Dashboard = () => {
                     </div>
                 </motion.div>
 
-                {/* Main Grid Layout */}
                 {/* Main Grid Layout - Creative Bento Box Design (Green Theme) */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
 
                     {/* ROW 1: Status & Trends */}
                     <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-sm border border-green-100 overflow-hidden hover:shadow-lg hover:shadow-green-100/50 transition-all duration-300 group">
@@ -141,12 +142,12 @@ const Dashboard = () => {
                             trend="up"
                         />
                     </div>
-                    <div className="lg:col-span-2 bg-white/80 backdrop-blur-md border border-green-100 rounded-2xl p-6 shadow-sm min-h-[350px] hover:shadow-lg hover:shadow-green-100/50 transition-all duration-300">
+                    <div className="lg:col-span-2 bg-white/80 backdrop-blur-md border border-green-100 rounded-2xl p-4 md:p-6 shadow-sm min-h-[300px] md:min-h-[350px] hover:shadow-lg hover:shadow-green-100/50 transition-all duration-300">
                         <PredictionGraph data={predictionData} />
                     </div>
 
                     {/* ROW 2: Navigation & Composition */}
-                    <div className="lg:col-span-2 bg-gradient-to-br from-green-50 to-emerald-50/30 backdrop-blur-md rounded-3xl border border-green-200 shadow-sm overflow-hidden min-h-[450px] hover:shadow-xl hover:shadow-green-100 transition-all duration-300">
+                    <div className="lg:col-span-2 bg-gradient-to-br from-green-50 to-emerald-50/30 backdrop-blur-md rounded-3xl border border-green-200 shadow-sm overflow-hidden min-h-[400px] md:min-h-[450px] hover:shadow-xl hover:shadow-green-100 transition-all duration-300">
                         <div className="p-4 border-b border-green-100 bg-white/40 flex items-center gap-2">
                             <div className="p-2 bg-green-100 rounded-full">
                                 <Truck className="h-5 w-5 text-green-600" />
