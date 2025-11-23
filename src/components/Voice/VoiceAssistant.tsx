@@ -126,7 +126,7 @@ const VoiceAssistant = () => {
     }
 
     return (
-        <div className="fixed bottom-6 right-24 z-50 flex flex-col items-end gap-4">
+        <div className="fixed bottom-6 right-6 md:right-24 z-[60] flex flex-col items-end gap-4">
             <AnimatePresence>
                 {(transcript || response) && (
                     <motion.div
