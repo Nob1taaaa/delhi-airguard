@@ -27,6 +27,12 @@ const Login = () => {
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        if (password.length < 6) {
+            alert("Password must be at least 6 characters long! 🔒");
+            return;
+        }
+
         setIsLoading(true);
 
         let msgIndex = 0;
