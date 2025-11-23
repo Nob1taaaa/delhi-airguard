@@ -34,19 +34,33 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
     const [aqiData, setAqiData] = useState<AQIData | null>(null);
     const [loading, setLoading] = useState(true);
     const [refreshTrigger, setRefreshTrigger] = useState(0);
-    const [userProfile, setUserProfile] = useState<UserProfile>({
-        name: "User",
-        isAsthmatic: false
+
+    // Load asthma mode from localStorage on mount
+    const [userProfile, setUserProfile] = useState<UserProfile>(() => {
+        const savedAsthmaMode = localStorage.getItem('airguard_asthma_mode');
+        return {
+            name: "User",
+            isAsthmatic: savedAsthmaMode === 'true'
+        };
     });
 
     const refreshData = () => setRefreshTrigger(prev => prev + 1);
-    const toggleAsthma = () => setUserProfile(prev => ({ ...prev, isAsthmatic: !prev.isAsthmatic }));
+
+    const toggleAsthma = () => {
+        setUserProfile(prev => {
+            const newAsthmaState = !prev.isAsthmatic;
+            // Save to localStorage
+            localStorage.setItem('airguard_asthma_mode', String(newAsthmaState));
+            return { ...prev, isAsthmatic: newAsthmaState };
+        });
+    };
 
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const response = await fetch(`http://localhost:8000/api/aqi/current?location=${location}`);
+                const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+                const response = await fetch(`${apiUrl}/api/aqi/current?location=${location}`);
                 const data = await response.json();
                 if (data && data.length > 0) {
                     setAqiData(data[0]);
