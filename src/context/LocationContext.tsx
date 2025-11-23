@@ -71,6 +71,18 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
                 }
             } catch (error) {
                 console.error("Failed to fetch AQI data", error);
+                // Fallback mock data for deployment when backend is not available
+                setAqiData({
+                    location: location,
+                    aqi: 342,
+                    pm25: 156.8,
+                    pm10: 289.4,
+                    no2: 78.2,
+                    so2: 34.5,
+                    co: 2.8,
+                    sources: { traffic: 35, industry: 28, stubble: 22, construction: 15 },
+                    timestamp: new Date().toISOString()
+                });
             } finally {
                 setLoading(false);
             }
