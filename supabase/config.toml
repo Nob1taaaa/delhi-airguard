@@ -1,0 +1,4 @@
+project_id = "ytoivdtbqmiqcgdeklkq"
+
+[functions.aqi-data]
+verify_jwt = false
