@@ -85,7 +85,15 @@ const FloatingChat = () => {
         const lowerQuery = query.toLowerCase();
 
         // Check for specific location query
-        const locationMatch = query.match(/(?:in|at|for)\s+([a-zA-Z\s]+?)(?:\?|$|!|\.|,)/i);
+        let locationMatch = query.match(/(?:in|at|for)\s+([a-zA-Z\s]+?)(?:\?|$|!|\.|,)/i);
+
+        // Fallback: support phrases like "tell me Varanasi" or "tell me about Delhi"
+        if (!locationMatch) {
+            locationMatch =
+                query.match(/tell me\s+about\s+([a-zA-Z\s]+?)(?:\?|$|!|\.|,)/i) ||
+                query.match(/tell me\s+([a-zA-Z\s]+?)(?:\?|$|!|\.|,)/i);
+        }
+
         let targetLocation = location;
         let targetData = aqiData;
 

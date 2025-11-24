@@ -61,7 +61,15 @@ export const generateAIResponse = async (query: string, currentLocation: string,
     const lowerQuery = query.toLowerCase();
 
     // 1. Check for Location Queries (Dynamic Fetching) - PRIORITY
-    const locationMatch = query.match(/(?:in|at|for)\s+([a-zA-Z\s]+?)(?:\?|$|!|\.|,)/i);
+    let locationMatch = query.match(/(?:in|at|for)\s+([a-zA-Z\s]+?)(?:\?|$|!|\.|,)/i);
+
+    // Fallback: support phrases like "tell me Varanasi" or "tell me about Delhi"
+    if (!locationMatch) {
+        locationMatch =
+            query.match(/tell me\s+about\s+([a-zA-Z\s]+?)(?:\?|$|!|\.|,)/i) ||
+            query.match(/tell me\s+([a-zA-Z\s]+?)(?:\?|$|!|\.|,)/i);
+    }
+
     let targetLocation = currentLocation;
     let targetData = currentAqiData;
 
